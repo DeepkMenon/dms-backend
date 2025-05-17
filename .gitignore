@@ -1,38 +1,49 @@
+# === Java / Maven ===
 target/
-!.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
+*.class
+*.jar
+*.war
+*.ear
 
-### IntelliJ IDEA ###
-.idea/modules.xml
-.idea/jarRepositories.xml
-.idea/compiler.xml
-.idea/libraries/
-*.iws
+# === Logs ===
+*.log
+logs/
+spring.log
+
+# === OS / System Files ===
+.DS_Store
+Thumbs.db
+
+# === IDEs ===
+# IntelliJ
+.idea/
 *.iml
 *.ipr
+*.iws
+out/
 
-### Eclipse ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
-
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-build/
-!**/src/main/**/build/
-!**/src/test/**/build/
-
-### VS Code ###
+# VSCode
 .vscode/
 
-### Mac OS ###
-.DS_Store
+# === Environment / Secrets ===
+.env
+*.env
+application-local.yml
+application-dev.yml
+application-prod.yml
+*.secret
+*.key
+*.pem
+
+# === Node/npm (if any frontend exists later) ===
+node_modules/
+dist/
+
+# === Misc ===
+*.swp
+*.bak
+*.tmp
+*.old
+
+# === MongoDB dump folders (if you ever use mongodump) ===
+dump/
