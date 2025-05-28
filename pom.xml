@@ -19,14 +19,6 @@
     <java.version>17</java.version>
     <spring.boot.version>3.2.5</spring.boot.version>
   </properties>
-
-Right-click on the project root (dms-backend)
-
-New > Module
-
-Choose Maven
-
-Name: document-service, Gro
   <dependencyManagement>
     <dependencies>
       <dependency>

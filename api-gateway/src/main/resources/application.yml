@@ -22,7 +22,9 @@ spring:
         - id: document-service
           uri: lb://document-service
           predicates:
-            - Path=/documents/**
+            - Path=/api/documents/**
+          filters:
+            - StripPrefix=1
       csrf:
         enabled: false
 

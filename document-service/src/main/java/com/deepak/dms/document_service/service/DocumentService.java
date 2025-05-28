@@ -1,8 +1,8 @@
-package service;
+package com.deepak.dms.document_service.service;
 
 import com.mongodb.client.gridfs.GridFSDownloadStream;
 import com.mongodb.client.gridfs.model.GridFSFile;
-import model.DocumentMetadata;
+import com.deepak.dms.document_service.model.DocumentMetadata;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
-import repository.DocumentMetadataRepository;
+import com.deepak.dms.document_service.repository.DocumentMetadataRepository;
 import com.mongodb.client.gridfs.GridFSBucket;
 
 import java.io.IOException;

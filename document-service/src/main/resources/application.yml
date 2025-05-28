@@ -4,7 +4,8 @@ spring:
 
   data:
     mongodb:
-      uri: mongodb+srv://user1:IOCEZCXnmlB9YrvZ@cluster0.itsriak.mongodb.net/dms-document-db?retryWrites=true&w=majority&appName=Cluster0
+      uri: mongodb+srv://user1:IOCEZCXnmlB9YrvZ@cluster0.itsriak.mongodb.net/documentdb?retryWrites=true&w=majority&appName=Cluster0
+      database: documentdb
 
   servlet:
     multipart:
@@ -20,4 +21,16 @@ eureka:
     fetch-registry: true
     service-url:
       defaultZone: http://localhost:8761/eureka/
+
+jwt:
+  secret: HBXtaDT+6oVTryG1wu1NoJvR3lXr4M77tn5QHzXvalbiZ8hwxRntEWPode0ZiL7F1ndZi+9FeAA4xJO2KYU3lg==
+
+logging:
+  level:
+    root: INFO
+    org.springframework.security: DEBUG
+    org.springframework.web: DEBUG
+    org.springframework.cloud.gateway: DEBUG
+    com.deepak.dms.document_service: DEBUG  # ✅ Replace with the correct base package if needed
+    io.jsonwebtoken: DEBUG  # Optional: if JWT verification happens in this service
 

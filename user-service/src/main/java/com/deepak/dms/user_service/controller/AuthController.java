@@ -1,59 +1,55 @@
 package com.deepak.dms.user_service.controller;
 
-
+import com.deepak.dms.user_service.dto.LoginRequest;
+import com.deepak.dms.user_service.dto.RegisterRequest;
 import com.deepak.dms.user_service.model.User;
+import com.deepak.dms.user_service.service.UserService;
+import com.deepak.dms.user_service.security.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
-import com.deepak.dms.user_service.security.JwtTokenUtil;
-import com.deepak.dms.user_service.service.UserService;
 
-import java.util.HashMap;
 import java.util.Map;
 
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
 
-  @Autowired
-  private AuthenticationManager authenticationManager;
+  private final AuthenticationManager authenticationManager;
+  private final UserService userService;
+  private final JwtTokenUtil jwtTokenUtil;
 
   @Autowired
-  private UserService userService;
-
-  @Autowired
-  private JwtTokenUtil jwtTokenUtil;
+  public AuthController(AuthenticationManager authenticationManager,
+                        UserService userService,
+                        JwtTokenUtil jwtTokenUtil) {
+    this.authenticationManager = authenticationManager;
+    this.userService = userService;
+    this.jwtTokenUtil = jwtTokenUtil;
+  }
 
   @PostMapping("/register")
-  public ResponseEntity<?> register(@RequestParam String username,
-                                    @RequestParam String password,
-                                    @RequestParam(defaultValue = "USER") String role) {
-    User user = userService.registerUser(username, password, role);
+  public ResponseEntity<User> register(@RequestBody RegisterRequest request) {
+    User user = userService.registerUser(request.getUsername(), request.getPassword(), request.getRole());
     return ResponseEntity.ok(user);
   }
 
   @PostMapping("/login")
-  public ResponseEntity<?> login(@RequestParam String username, @RequestParam String password) {
+  public ResponseEntity<Map<String, String>> login(@RequestBody LoginRequest request) {
     Authentication authentication = authenticationManager.authenticate(
-      new UsernamePasswordAuthenticationToken(username, password)
+      new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword())
     );
 
-    final UserDetails userDetails = userService.loadUserByUsername(username);
-    final String token = jwtTokenUtil.generateToken(userDetails);
+    String token = jwtTokenUtil.generateToken((org.springframework.security.core.userdetails.UserDetails) authentication.getPrincipal());
 
-    Map<String, String> response = new HashMap<>();
-    response.put("token", token);
-    return ResponseEntity.ok(response);
+    return ResponseEntity.ok(Map.of("token", token));
   }
 
   @GetMapping("/users")
   public ResponseEntity<?> getAllUsers() {
     return ResponseEntity.ok(userService.getAllUsers());
   }
-
-
 }
