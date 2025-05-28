@@ -1,6 +1,6 @@
-package repository;
+package com.deepak.dms.document_service.repository;
 
-import model.DocumentMetadata;
+import com.deepak.dms.document_service.model.DocumentMetadata;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;

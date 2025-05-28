@@ -1,12 +1,12 @@
-package controller;
+package com.deepak.dms.document_service.controller;
 import com.mongodb.client.gridfs.GridFSDownloadStream;
 import jakarta.servlet.http.HttpServletResponse;
-import model.DocumentMetadata;
+import com.deepak.dms.document_service.model.DocumentMetadata;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
   import org.springframework.web.multipart.MultipartFile;
-import service.DocumentService;
+import com.deepak.dms.document_service.service.DocumentService;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -20,7 +20,7 @@ public class DocumentController {
   private DocumentService documentService;
 
   // 🔼 Upload a single document
-  @PostMapping
+  @PostMapping("/upload")
   public ResponseEntity<String> uploadDocument(
     @RequestParam("file") MultipartFile file,
     @RequestParam("title") String title,
